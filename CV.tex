@@ -1,0 +1,123 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- 基础宏包 ---
+\usepackage[utf8]{inputenc}
+\usepackage{fontspec} % 允许调动字体
+\usepackage[scale=0.85, top=2cm, bottom=2cm]{geometry} % 边距
+\usepackage{xcolor} % 颜色控制
+\usepackage{titlesec} % 用于定义标题样式
+\usepackage{enumitem} % 列表控制
+\usepackage{tabularx}
+\usepackage{fontawesome5} % 图标
+\usepackage[hidelinks]{hyperref} % 超链接
+\usepackage{amscd, amsthm, amsfonts, amssymb, amsmath, amsxtra} 
+
+\usepackage[
+    backend=biber,
+    style=nature,
+    sorting=ydnt,
+    defernumbers=true  % 强制重新计算编号顺序
+]{biblatex}
+
+
+% --- 层次化绿色定义 (深邃且具有数学感) ---
+\definecolor{myblue}{RGB}{70, 130, 180}
+\definecolor{acdamicblue}{RGB}{50, 100, 180}
+
+\definecolor{darkgray}{RGB}{70, 70, 70}
+
+\definecolor{HeaderGreen}{RGB}{25, 80, 45}   % 深森林绿：用于大标题、姓名（显权威）
+\definecolor{DetailGreen}{RGB}{55, 110, 80}  % 专业苔藓绿：用于文献编号、细节强调
+\definecolor{LinkGreen}{RGB}{0, 110, 85}    % 活力海洋绿：用于 URL、DOI 链接（清晰易辨）
+\definecolor{SecondaryGray}{RGB}{100, 105, 100} % 冷灰色：用于日期、地点（低调辅助）
+
+% --- 链接颜色应用 ---
+\hypersetup{
+    colorlinks=true,
+    urlcolor=LinkGreen,     % 外部链接  
+}
+
+% --- 标题样式自定义 (Section) ---
+\titleformat{\section}
+  {\Large\bfseries\color{myblue}\raggedright} % 字体大、加粗、蓝色
+  {}{0em} % 序号
+  {} % 前缀
+  [{\color{lightgray}\titlerule[1pt]}] % 标题下方的浅灰色横线
+
+\titlespacing*{\section}{0pt}{12pt}{8pt}
+
+% --- 你的自定义命令 (完全保留逻辑，但修复了兼容性) ---
+\newcommand*{\customcventry}[4][2pt]{
+  \noindent
+  {\bfseries #2} \hfill $#3$ \\ % 标题行：加粗内容 + 数学斜体年份
+  \ifx&#4& \else 
+    \noindent #4 \\ % 描述行：取消 \small，保持与正文一致或手动控制
+  \fi
+  \par\addvspace{#1}
+}
+
+
+
+\addbibresource{paper.bib}
+
+
+
+
+% --- 个人信息排版 ---
+\begin{document}
+
+% 姓名部分
+\begin{center}
+    {\Huge \bfseries \color{acdamicblue} Qiutong Wang} \\ [10pt]
+    \small
+    \faMapMarker*\enspace \color{darkgray} 866 Yuhangtang Road, Zhejiang University, Hangzhou 310058, China \\
+    \faEnvelope[regular]\enspace \href{mailto:wang.qt@zju.edu.cn}{wang.qt@zju.edu.cn} \enspace 
+    %| \enspace \faGlobe\enspace \href{https://yourwebsite.com}{yourwebsite.com}
+\end{center}
+
+\vspace{5mm}
+
+% --- 简历正文 ---
+
+\section{EDUCATION}
+
+\customcventry{Ph.D. in Mathematics, Zhejiang University}{2022 - 2028}{
+    Advisor: Prof. Binyong Sun
+}
+
+\customcventry{B.Sc. in Mathematics, East China Normal University}{2017 - 2022}{}
+
+
+\section{RESEARCH INTERESTS}
+\noindent Representation theory of real reductive groups and their geometric structures.
+
+
+\section{PUBLICATIONS}
+\nocite{*} 
+\printbibliography[heading=none]
+
+
+\section{TEACHING EXPERIENCES}
+\noindent \textbf{Teaching Assistant, Zhejiang University} \hfill \\
+\begin{itemize}[leftmargin=1.5em, noitemsep, topsep=2pt]
+  \item \textbf{MATH3203M: Lie Groups and Lie Algebras} \hfill \textit{Spring, Summer 2023}
+  \item \textbf{MATH2282M: Abstract Algebra (Continued)} \hfill \textit{Fall, Winter 2023--2024}
+\end{itemize}
+
+
+\section{SELECTED TALKS}
+\noindent
+\begin{tabularx}{\textwidth}{@{}l X@{}}
+Aug 11, 2025 & \textbf{Counting of irreducible representations} \\
+& Workshop on Relative Langlands Program, Tianyuan Mathematics Research Center, Yunnan, China \\
+\end{tabularx}
+
+
+\section{Language Skills}
+\noindent\textbf{Mandarin Chinese:} Native \\
+\noindent\textbf{English:} Fluent in academic writing and communication
+
+\end{document}
+
+
+
