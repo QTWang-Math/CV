@@ -1,0 +1,40 @@
+name: Compile CV
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compile:
+    name: Build PDF
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Prepare output directory
+        run: mkdir -p temp
+
+      - name: Compile CV with XeLaTeX
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: CV.tex
+          latexmk_use_xelatex: true
+          args: >-
+            -file-line-error
+            -halt-on-error
+            -interaction=nonstopmode
+            -outdir=temp
+
+      - name: Upload compiled CV
+        uses: actions/upload-artifact@v7
+        with:
+          name: CV
+          path: temp/CV.pdf
+          if-no-files-found: error
+          retention-days: 30

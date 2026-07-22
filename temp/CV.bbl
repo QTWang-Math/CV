@@ -41,7 +41,8 @@
       \field{labeltitlesource}{title}
       \field{eprintclass}{math.RT}
       \field{eprinttype}{arXiv}
-      \field{note}{Representation Theory (American Mathematical Society), to appear.}
+      \field{journaltitle}{Representation Theory}
+      \field{note}{To appear}
       \field{title}{Counting irreducible representations of general linear groups and unitary groups}
       \field{year}{2025}
       \true{nocite}

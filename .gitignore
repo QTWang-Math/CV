@@ -1,0 +1,17 @@
+.DS_Store
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.xdv
+
+# Keep all generated files, including the final PDF, in temp/.
+temp/
