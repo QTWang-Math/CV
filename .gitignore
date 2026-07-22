@@ -13,5 +13,6 @@
 *.synctex.gz
 *.xdv
 
-# Keep all generated files, including the final PDF, in temp/.
-temp/
+# Ignore temporary build files but keep the final PDF.
+temp/*
+!temp/CV.pdf
