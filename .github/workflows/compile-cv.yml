@@ -5,13 +5,16 @@ on:
   pull_request:
   workflow_dispatch:
 
-permissions:
-  contents: read
+concurrency:
+  group: compile-cv-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   compile:
     name: Build PDF
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Check out repository
@@ -38,3 +41,33 @@ jobs:
           path: temp/CV.pdf
           if-no-files-found: error
           retention-days: 30
+
+  publish:
+    name: Save final PDF
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: compile
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Download compiled CV
+        uses: actions/download-artifact@v8
+        with:
+          name: CV
+          path: temp
+
+      - name: Commit final PDF
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f temp/CV.pdf
+          if git diff --cached --quiet; then
+            echo "CV.pdf is already up to date."
+          else
+            git commit -m "Update compiled CV"
+            git push
+          fi
